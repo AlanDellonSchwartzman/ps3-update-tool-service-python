@@ -24,7 +24,4 @@ def main(serial: str):
   if type(updates) == dict and updates["error"]:
     raise HTTPException(status_code=404, detail="not found")
   
-  if not updates:
-    print('No update avaliable')
-  
   return updates

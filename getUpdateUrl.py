@@ -1,5 +1,4 @@
-import requests, xmltodict, json
-from fastapi import HTTPException
+import requests, xmltodict
 
 def getUpdate(package):
   return {
@@ -15,7 +14,10 @@ def main(serial):
 
   if (response.status_code == 404): 
     return {'error': 'not found'}
-    
+
+  if not (response.content):
+    return ()
+  
   dictionary = xmltodict.parse(response.text)
 
   return list(map(getUpdate, dictionary['titlepatch']['tag']['package']))
