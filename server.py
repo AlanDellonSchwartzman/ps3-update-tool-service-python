@@ -21,7 +21,7 @@ app.add_middleware(
 def main(serial: str):
   updates = getUpdateUrl.main(serial)
 
-  if type(updates) == dict and updates["error"]:
-    raise HTTPException(status_code=404, detail="not found")
+  if (type(updates) == dict and updates.get('error')):
+    raise HTTPException(status_code=404, detail=updates["error"])
   
   return updates
