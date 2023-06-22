@@ -17,7 +17,7 @@ def main(serial):
     return {'error': 'Game not found'}
 
   if not (response.content):
-    return ()
+    return {'title': '', 'updates': []}
   
   dictionary = xmltodict.parse(response.text)
 
@@ -25,10 +25,10 @@ def main(serial):
 
   if (type(packages) == list):
     title = dictionary['titlepatch']['tag']['package'][-1]['paramsfo']['TITLE']
-    return {title: list(map(getUpdate, packages))}
+    return {'title': title, 'updates': list(map(getUpdate, packages))}
   elif (isinstance(packages, dict)):
     title = dictionary['titlepatch']['tag']['package']['paramsfo']['TITLE']
     print('TITLE: ', title)
-    return {title: [getUpdate(packages)]}
+    return {'title': title, 'updates': [getUpdate(packages)]}
   else:
-    return {'error': 'error'}
+    return {'title': '', 'updates': [], 'error': 'error'}
