@@ -3,13 +3,13 @@
   "builds": [
       {
           "src": "./server.py",
-          "use": "@now/python"
+          "use": "@vercel/python"
       }
   ],
   "routes": [
       {
           "src": "/(.*)",
-          "dest": "./server.py"
+          "dest": "server.py"
       }
   ]
 }
